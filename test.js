@@ -62,6 +62,17 @@ function update_enc_pass(user_id,new_enc_pass){
 		else{console.log("updated enc_pass");}
 	});
 }
+
+function update_log(user_id,new_log){
+	root_db.ref('users/'+user_id).update( {
+		log: new_log
+	},function(error){
+		if(error) {console.log(error);}
+		else{console.log("updated log");}
+	});
+}
+
+//grab encrypted password string
 function grab_enc_pass(user_id,acc_password){
 	//console.log("grabbing enc_pass");
 	var pass = passwordHash.generate(acc_password);//redundant
@@ -81,6 +92,25 @@ function grab_enc_pass(user_id,acc_password){
 	});	
 }
 
+//return log
+function grab_log(user_id,acc_password){
+	//console.log("grabbing log");
+	var pass = passwordHash.generate(acc_password);//redundant
+	root_db.ref('users/'+user_id).once('value').then(function(snapshot) {
+		var log = snapshot.val().log;
+		var user_pass = snapshot.val().acc_password;
+		if(passwordHash.verify(acc_password,user_pass) ){
+			console.log("grabbing log");
+			console.log(log);
+			return log;
+		}
+		else{console.log("wrong password");}
+		//console.log( JSON.stringify(snapshot.val().enc_pass) );
+	}, function(error){ 
+		if(error){console.log(error);}
+		else{console.log("grabbed log");}
+	});	
+}
 
 var aa = "sample_id1";var a = "sample2@gmail.com";var b = "sample_pass2";
 var bb = "sample_pass3";var c = "2345";var d = 1234; var e = "log";
