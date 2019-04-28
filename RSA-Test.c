@@ -290,7 +290,7 @@ int send_output(mpz_t message){
 
 	FILE* fd;
 	//char* filename = "/home/bitnami/progs/output.txt";
-	char* filename1 = "./output_RSA.txt";
+	char* filename1 = "./output.txt";
 	int errno;
 
 	fd = fopen(filename1,"w+");
@@ -390,11 +390,19 @@ struct timeval dec_start, dec_end; /* Used to compute elapsed time. */
 for(y = 0; y < 10; y++){//TODO too long to run
 		//set message to y;
 		random1 = rand();
-		random2 = rand();
+		random2 = rand();//up to 32,000 at least
 		mpz_t val;mpz_init(val);
 		mpz_t ra1;mpz_init_set_si(ra1,random1);mpz_t ra2;mpz_init_set_si(ra2,random2);
-
-		mpz_addmul(val,ra1 ,ra2 );
+// val = ra1 ^ 8 * ra2 ^ 8
+		mpz_addmul(val,ra1 ,ra2 );//val = ra1 * ra2;30k*30k
+			mpz_addmul(val,ra1 ,ra2 );//val = ra1 * ra2;
+			mpz_addmul(val,ra1 ,ra2 );//val = ra1 * ra2;
+			mpz_addmul(val,ra1 ,ra2 );//val = ra1 * ra2;
+			mpz_addmul(val,ra1 ,ra2 );//val = ra1 * ra2;12digits
+			mpz_addmul(val,ra1 ,ra2 );//val = ra1 * ra2;
+			mpz_addmul(val,ra1 ,ra2 );//val = ra1 * ra2;20digits
+			mpz_addmul(val,ra1 ,ra2 );//val = ra1 * ra2;
+		
 		mpz_set(message ,val);//set msg to random1 * random2;
 		gettimeofday(&enc_start, 0); // start timer
 	encrypt_message(message, e, n, message_enc);
@@ -465,6 +473,7 @@ int main(int argc, char * argv[]) {
 	mpz_t test_q;
 	mpz_init_set_str(test_p,"e021757c777288dacfe67cb2e59dc02c70a8cebf56262336592c18dcf466e0a4ed405318ac406bd79eca29183901a557db556dd06f7c6bea175dcb8460b6b1bc05832b01eedf86463238b7cb6643deef66bc4f57bf8ff7ec7c4b8a8af14f478980aabedd42afa530ca47849f0151b7736aa4cd2ff37f322a9034de791ebe3f51",16);
 	mpz_init_set_str(test_q,"ed1571a9e0cd4a42541284a9f98b54a6af67d399d55ef888b9fe9ef76a61e892c0bfbb87544e7b24a60535a65de422830252b45d2033819ca32b1a9c4413fa721f4a24ebb5510ddc9fd6f4c09dfc29cb9594650620ff551a62d53edc2f8ebf10beb86f483d463774e5801f3bb01c4d452acb86ecfade1c7df601cab68b065275",16);
+	mpz_t test_e; mpz_init_set_str(test_e,"65537",10);
 
 	int opt = 0;
 	while ((opt = getopt(argc, argv, "p:q:")) != -1) {
@@ -498,10 +507,21 @@ int main(int argc, char * argv[]) {
 		RSA(test_p,test_q);
 	}
 	else{
-		printf("\nTEST result: NEGATIVE\n");
+		printf("\nTEST result: NEGATIVE\nTesting parameter generation\n");
+		struct timeval para_start, para_end; /* Used to compute elapsed time. */
+		
+		gettimeofday(&para_start, 0);
+		gen_prime(test_p,test_e);//parameters
+		gen_prime(test_q,test_e);//parameters
+		gettimeofday(&para_end, 0);
+		printf("Time to generate parameters: ");
+		time_diff(&para_start, &para_end);
+
 	}
 	mpz_clear(test_p);
 	mpz_clear(test_q);
+	mpz_clear(test_e);
+
 	//Test if P != Q
 
 
