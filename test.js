@@ -165,9 +165,11 @@ setTimeout(function() {
 setTimeout(function() {
 	var id = "sample_id2";
 	var pass = "password2";
-	 var enc_pass = grab_enc_pass(id,pass);
-	 var logs = grab_log(id,pass);
-	 console.log("Grabbed user log is: " + logs);
-	 console.log("Grabbed user enc_pass is : " + enc_pass);
+//	 var enc_pass =
+ grab_enc_pass(id,pass);
+//	 var logs =
+ grab_log(id,pass);
+	 console.log("Grabbed user log is: ");
+	 console.log("Grabbed user enc_pass is : ");
 } , 10000);//5 second delay then run function
 
