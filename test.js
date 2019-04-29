@@ -140,3 +140,34 @@ var child = execFile(path_to_exec, [arg1, arg2],
 });
 
 //update_enc_pass(aa,output);
+
+//wait 1.5 seconds then create new user
+setTimeout(function() {
+	var id = "sample_id2";
+	var email = "sample2@gmail.com";
+	var password = "password2" ;
+	var encrypt = " ";
+	var hw_id = 4455;
+	var logs = " ";
+	 write_NewUser(id,email,password,encrypt,hw_id,logs );
+} , 1500);//1.5 second delay then run function
+
+//wait 5secs then update logs and enc_password fields
+setTimeout(function() {
+	var id = "sample_id2";
+	var encrypt = "173865465454544465465465465465454654654654654654654654654";
+	var logs = "Sample log, no action required.";
+	 update_enc_pass(id,encrypt );
+	 update_log(id,logs);
+} , 5000);//5 second delay then run function
+
+//wait 10 seconds then return the new_users enc_pass & logs
+setTimeout(function() {
+	var id = "sample_id2";
+	var pass = "password2";
+	 var enc_pass = grab_enc_pass(id,pass);
+	 var logs = grab_log(id,pass);
+	 console.log("Grabbed user log is: " + logs);
+	 console.log("Grabbed user enc_pass is : " + enc_pass);
+} , 10000);//5 second delay then run function
+
