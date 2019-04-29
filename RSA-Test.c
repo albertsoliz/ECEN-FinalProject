@@ -436,7 +436,7 @@ for(y = 0; y < 10; y++){//TODO too long to run
 			printf("Time to decrypt: ");
 			time_diff(&dec_start, &dec_end);
 
-			send_output(message_enc);
+			//send_output(message_enc);
 
 			cnt++;
 		}
@@ -445,6 +445,11 @@ for(y = 0; y < 10; y++){//TODO too long to run
 }
 
 printf("Passed %ld/%ld\n",cnt,y);
+mpz_init_set_str(message, "1976620216402300889624482718775150",10);
+encrypt_message(message, e, n, message_enc);
+mpz_out_str(stdout ,10 ,message_enc);//output arg2 to stdout return 0 if error
+send_output(message_enc);
+decrypt_message(message_enc, d, n, message);
 
 		//decimal_to_string(message, str);
 

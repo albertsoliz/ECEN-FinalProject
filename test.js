@@ -118,9 +118,10 @@ var ee = "9999";
 //write_NewUser(aa,a,b,c,d,e);
 //update_enc_pass(aa,ee);
 grab_enc_pass(aa,b);
-var path_to_exec = "/home/bitnami/progs/a.out";
-var arg1 = "12384";
-var arg2 = "454545";
+var path_to_exec = "/home/bitnami/progs/RSA";
+//TODO "/home/bitnami/progs/ELGAMAL";
+var arg1 = "e021757c777288dacfe67cb2e59dc02c70a8cebf56262336592c18dcf466e0a4ed405318ac406bd79eca29183901a557db556dd06f7c6bea175dcb8460b6b1bc05832b01eedf86463238b7cb6643deef66bc4f57bf8ff7ec7c4b8a8af14f478980aabedd42afa530ca47849f0151b7736aa4cd2ff37f322a9034de791ebe3f51";
+var arg2 = "ed1571a9e0cd4a42541284a9f98b54a6af67d399d55ef888b9fe9ef76a61e892c0bfbb87544e7b24a60535a65de422830252b45d2033819ca32b1a9c4413fa721f4a24ebb5510ddc9fd6f4c09dfc29cb9594650620ff551a62d53edc2f8ebf10beb86f483d463774e5801f3bb01c4d452acb86ecfade1c7df601cab68b065275";
 var output = "888888";
 var child = execFile(path_to_exec, [arg1, arg2],
   function (error, stdout, stderr) {

@@ -648,7 +648,7 @@ decrypt_message(c1 , c2, p, q , g, b, message_dec);//decrypt a msesgae from A, b
 		printf("Time to decrypt: ");
 		time_diff(&dec_start, &dec_end);
 
-		send_output(c1, c2);
+		//send_output(c1, c2);
 
 		cnt++;
 	}
@@ -656,6 +656,12 @@ decrypt_message(c1 , c2, p, q , g, b, message_dec);//decrypt a msesgae from A, b
 	mpz_clear(val);
 }
 printf("Passed %ld/%ld\n",cnt,y);
+mpz_init_set_str(message, "1976620216402300889624482718775150",10);
+encrypt_message(message, p, q , g, B, c1, c2);//encrypt from A to B
+mpz_out_str(stdout ,10 ,c1);//output arg2 to stdout return 0 if error
+mpz_out_str(stdout, 10, c2);//messagepart2
+send_output(c1,c2);
+decrypt_message(c1 , c2, p, q , g, b, message_dec);//decrypt a msesgae from A, by B
 
 
 	//decimal_to_string(message, str);
