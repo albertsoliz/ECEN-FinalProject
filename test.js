@@ -166,11 +166,20 @@ setTimeout(function() {
 setTimeout(function() {
 	var id = "sample_id2";
 	var pass = "password2";
-//	 var enc_pass =
  grab_enc_pass(id,pass);
-//	 var logs =
  grab_log(id,pass);
 	 console.log("Grabbed user log is: ");
 	 console.log("Grabbed user enc_pass is : ");
-} , 10000);//5 second delay then run function
+} , 10000);//10 second delay then run function
+
+//wait 15 seconds then return the new_users enc_pass & logs
+setTimeout(function() {
+	var id = "sample_id2";
+	var pass = "password3";
+ grab_enc_pass(id,pass);
+ grab_log(id,pass);
+	// console.log("Grabbed user log is: ");
+	// console.log("Grabbed user enc_pass is : ");
+} , 15000);//15 second delay then run function
+
 
