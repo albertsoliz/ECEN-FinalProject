@@ -30,7 +30,7 @@ usersRef.once("value").then( function(snapshot) {
 //add new user file
 function write_NewUser(user_id,email,password,enc,hwid,logs){
 	var new_pass = passwordHash.generate(password);
-	
+	console.log("Writing new user");
 	 root_db.ref('users/'+user_id).set( {
 		acc_email: email,
 		acc_password: new_pass,
@@ -74,7 +74,7 @@ function update_log(user_id,new_log){
 
 //grab encrypted password string
 function grab_enc_pass(user_id,acc_password){
-	//console.log("grabbing enc_pass");
+	console.log("grabbing enc_pass");
 	var pass = passwordHash.generate(acc_password);//redundant
 	root_db.ref('users/'+user_id).once('value').then(function(snapshot) {
 		var enc_pass = snapshot.val().enc_pass;
@@ -94,7 +94,7 @@ function grab_enc_pass(user_id,acc_password){
 
 //return log
 function grab_log(user_id,acc_password){
-	//console.log("grabbing log");
+	console.log("grabbing log");
 	var pass = passwordHash.generate(acc_password);//redundant
 	root_db.ref('users/'+user_id).once('value').then(function(snapshot) {
 		var log = snapshot.val().log;
@@ -176,6 +176,7 @@ setTimeout(function() {
 setTimeout(function() {
 	var id = "sample_id2";
 	var pass = "password3";
+console.log("Attempting to access data with WRONG password");
  grab_enc_pass(id,pass);
  grab_log(id,pass);
 	// console.log("Grabbed user log is: ");
