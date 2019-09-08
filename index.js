@@ -17,7 +17,7 @@
  const functions = require('firebase-functions'); 
 const admin = require('firebase-admin');
   var firebaseConfig = {
-    apiKey: "AIzaSyD41paQ7qmqBf3Saq7plTgg8mPu0JLfpbA",
+    apiKey: ";IzaSyD41paQ7qmqBf3Saq7plTgg8mPu0JLfpbA",
     authDomain: "database-16835.firebaseapp.com",
     databaseURL: "https://database-16835.firebaseio.com",
     projectId: "database-16835",
